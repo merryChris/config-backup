@@ -1,0 +1,8 @@
+set completion-ignore-case on
+set completion-map-case on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+Control-j: menu-complete
+Control-k: menu-complete-backward
+"\e[A": history-search-backward
+"\e[B": history-search-forward

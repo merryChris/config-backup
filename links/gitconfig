@@ -1,0 +1,17 @@
+[user]
+	name = Zacky Su
+	email = zacky.sue@gmail.com
+[core]
+	editor = vim
+[alias]
+	st = status
+	br = branch
+	lg = log
+	co = checkout
+	ci = commit
+[color]
+	status = auto
+	branch = auto
+	diff = auto
+	grep = auto
+	interactive = auto

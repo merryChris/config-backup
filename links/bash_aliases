@@ -1,0 +1,22 @@
+alias update_mp3='mid3iconv -e gbk *.mp3'
+alias start_programs='~/Programs/Cmds/start_programs.sh'
+alias upload='~/Programs/Cmds/upload.py'
+
+alias clear_tmp='rm -rf tmp/ coverage.data'
+alias compile_h1o='./script/custom/min all'
+alias compile_h2o='bundle exec rake assets:precompile RAILS_ENV=production'
+alias start_h1o='mongrel_rails start -p 1111'
+alias start_h2o='RAILS_ENV=development ASSETS_DEBUG=false ./script/rails server -p 2222'
+alias start_h2o_debug='RAILS_ENV=development ASSETS_DEBUG=true ./script/rails server -p 2222'
+alias start_h2o_prod='RAILS_ENV=production ASSETS_DEBUG=false ./script/rails server -p 2222'
+alias start_tempo='bundle exec rackup -p 3333'
+
+alias test_rb='RAILS_ENV=development bundle exec ./script/guard -g rspec'
+alias test_js='RAILS_ENV=development bundle exec ./script/guard -g jasmine'
+alias test_al='RAILS_ENV=development bundle exec ./script/guard'
+
+alias ssh203='ssh zanwen@10.20.0.203'
+alias mysql200='mysql -umysqluser -pmojiti -h 10.20.0.200'
+alias mysql42='mysql -uhuro -p -h 10.16.20.42'
+alias mysql51='mysql -umysqluser -pmojiti -h 10.16.1.51'
+alias mysql32='mysql -usitedev -p112233aabbcc -h210.30.96.32 -P 3306'
