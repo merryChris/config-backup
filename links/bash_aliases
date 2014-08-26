@@ -1,6 +1,8 @@
 alias update_mp3='mid3iconv -e gbk *.mp3'
 alias start_programs='~/Programs/Cmds/start_programs.sh'
+alias start_eclipse='/home/zacky/Programs/Eclipse/eclipse'
 alias upload='~/Programs/Cmds/upload.py'
+alias clip='xclip -sel clip <'
 
 alias clear_tmp='rm -rf tmp/ coverage.data'
 alias compile_h1o='./script/custom/min all'
@@ -16,7 +18,10 @@ alias test_js='RAILS_ENV=development bundle exec ./script/guard -g jasmine'
 alias test_al='RAILS_ENV=development bundle exec ./script/guard'
 
 alias ssh203='ssh zanwen@10.20.0.203'
+alias ssh55='ssh root@10.214.192.55'
+
 alias mysql200='mysql -umysqluser -pmojiti -h 10.20.0.200'
 alias mysql42='mysql -uhuro -p -h 10.16.20.42'
 alias mysql51='mysql -umysqluser -pmojiti -h 10.16.1.51'
 alias mysql32='mysql -usitedev -p112233aabbcc -h210.30.96.32 -P 3306'
+alias mysql66='mysql -uroot -pzju601 -h10.214.192.66 -P 3306'

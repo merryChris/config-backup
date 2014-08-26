@@ -22,6 +22,12 @@ website header sample:
 
 factory girl: http://collectiveidea.com/blog/archives/2013/11/05/factory-girl-without-active-record/
 
+git tutorials:
+  http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+
+maven tutorials:
+  http://www.cnblogs.com/dcba1112/archive/2011/05/01/2033805.html
+
 Curry:
   Should focus on main function implentments instead of css layouts.
   TODO LIST:
