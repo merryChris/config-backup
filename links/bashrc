@@ -116,7 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-PS1='\[\e]2;\w\a\e[0;35m\]\u@\h:\[\e[1;36m\]\w$(var=$?; __git_ps1 " \[\e[0;31m\]%s "; [ $var = 0 ] && echo -e "\e[1;32m:)" || echo -e "\e[1;31m:(")\[\e[m\]\$ '
+PS1='\[\e[0;35m\]\u@\h:\[\e[1;36m\]\w$(var=$?; __git_ps1 " \[\e[0;31m\]%s "; [ $var = 0 ] && echo -e "\[\e[1;32m\]:)" || echo -e "\[\e[1;31m\]:(")\[\e[m\]\$ '
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
