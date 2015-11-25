@@ -1,7 +1,7 @@
 config-backup
 =============
 
-Backup for configuration files
+Backup For Configuration Files
 
 Explainations:
 
@@ -9,5 +9,5 @@ Explainations:
 
 Samples:
 
-  1.pictures
-  2.bash vim configs
+  1.  Pictures
+  2.  Bash/Vim Configuration Files
