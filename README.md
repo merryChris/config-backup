@@ -1,13 +1,8 @@
-config-backup
-=============
-
 Backup For Configuration Files
+======
 
-Explainations:
 
-  Generally speaking, it contains two parts, dynamic hard links and static files.
+## Description
 
-Samples:
-
-  1.  Pictures
-  2.  Bash/Vim Configuration Files
+* Used to backup bash configs.
+* Used to backup static files like packages & wallpapers.

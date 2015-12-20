@@ -46,6 +46,7 @@ Plugin 'FuzzyFinder'
 "Plugin 'taglist.vim'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 
@@ -127,6 +128,9 @@ highlight LineNr ctermbg=NONE
 highlight Normal ctermbg=NONE
 highlight NonText ctermbg=NONE
 highlight SpecialKey ctermbg=NONE
+highlight SignColumn ctermbg=NONE
+highlight Folded ctermbg=DarkYellow
+highlight Pmenu ctermbg=DarkYellow
 highlight StatusLineNC ctermbg=DarkMagenta
 
 " Plugins Mappers
@@ -144,12 +148,15 @@ nnoremap <silent> ff :FufFile<CR>
 let NERDTreeIgnore=['\.swp$[[file]]', '\~$[[file]]']
 let NERDTreeMinimalUI=1
 " Syntax Checker
+let g:go_fmt_fail_silently = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_jump = 0
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_balloons = 1
+
 "let Tlist_GainFocus_On_ToggleOpen=1
 "let Tlist_Show_One_File=1
 "let Tlist_WinWidth=40

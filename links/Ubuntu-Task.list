@@ -1,51 +1,41 @@
 ######################### Things Need ToBe Done #########################
 
-1.
-
-2.
-
-3. Know Something About Unix How To Initialize Shell.
+1. Know Something About Unix How To Initialize Shell.
 
    Referral Link: http://reyesyang.info/articles/26-how-to-initialize-a-new-shell-in-unix-like-os
 
-4. Try To Manage Icons In Top Right Corner.
+2. Try To Manage Icons In Top Right Corner.
 
-5. Get Familar to *.so Files & Gnome.
+3. Get Familar to *.so Files & Gnome.
 
 
 ######################### Things Have Been Done #########################
 
-1.  Install Basic APPS.
-
-2.  Get Comfortable Wallpaper.
+1.  Get Comfortable Wallpaper.
 
     Referral Link: http://itsfoss.com
 
-3.  Config VPN & Email Staffs
+2.  Config VPN & Email Staffs
 
     Referral Link: http://wireless.siu.edu/install-ubuntu-64.htm
 
     Hulu Wiki For Setup Ubuntu Workstation: https://wiki.hulu.com/display/BestPractices/Setting+up+an+ubuntu+workstation
 
-4.  Qt5Widgets_DIR:PATH=Qt5Widgets_DIR-NOTFOUND
+3.  Qt5Widgets_DIR:PATH=Qt5Widgets_DIR-NOTFOUND
 
     .vimrc: set mouse=v
 
-5.  Install qq For Linux.
-
-    Referral Link: http://blog.ubuntusoft.com/ubuntu-qq.html#.Uu-3yXWSySQ
-
-6.  Add 'xptemplate' plugin for vim
+4.  Add 'xptemplate' plugin for vim
 
     Referral Link: http://ruby-china.org/topics/4054
 
-7.  Setup Curry.
+5.  Setup Curry.
 
-8.  Where Is My Music & Lyrics. What A Fuck!
+6.  Where Is My Music & Lyrics. What A Fuck!
 
     Referral Link: http://hi.baidu.com/shuqq105/item/900ea6c2c5f77466f6c95d65
 
-9.  Add '.inputrc' To Perfect <Tab> In Bash.
+7.  Add '.inputrc' To Perfect <Tab> In Bash.
 
     Referral Link: http://www.kuqin.com/linux/20111031/314103.html
 
