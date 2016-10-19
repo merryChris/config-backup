@@ -5,32 +5,34 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936
 
 set nu
+set magic
 set ruler
 set cindent
-set autoindent
-set ignorecase
-set smartcase
 set showcmd
-set cursorline
-set magic
 set hlsearch
 set incsearch
+set smartcase
+set autoindent
+set ignorecase
+set cursorline
+set nocompatible
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
 set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set list listchars=tab:»·,trail:·
 
 set fo=trocq
 set t_Co=256
-set backspace=start
 set mouse=v
-set ttimeoutlen=100
 set laststatus=2
+set ttimeoutlen=100
+set backspace=indent,eol,start
 set statusline=%<%f\ %m%r%h%w%{fugitive#statusline()}[TYPE=%Y]%=%-14.(%l,%c%V%)\ [%P]
 
 " set the runtime path to include Vundle and initialize
-set nocompatible
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
@@ -44,6 +46,9 @@ Plugin 'L9'
 Plugin 'fcitx.vim'
 Plugin 'FuzzyFinder'
 "Plugin 'taglist.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'davidhalter/jedi-vim'
+"Plugin 'klen/python-mode'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
@@ -106,21 +111,16 @@ nmap cS :%s/\s\+$//g<CR>:noh<CR>
 nmap cM :%s/\r$//g<CR>:noh<CR>
 
 " For Python
-autocmd filetype python source ~/.vim/python-macros.vim
-autocmd filetype python set shiftwidth=4
-autocmd filetype python set tabstop=4
+" autocmd filetype python source ~/.vim/python-macros.vim
 
 " For Ruby
-autocmd filetype ruby source ~/.vim/ruby-macros.vim
+" autocmd filetype ruby source ~/.vim/ruby-macros.vim
 
 " For JavaScript
 let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function;m:member'
 
 " For HTML
 au BufNewFile,BufRead *.jst,*.hbs,*.erb set filetype=html
-
-" autocmd FileType ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
-set list listchars=tab:»·,trail:·
 
 " Colorscheme Settings
 colorscheme jelleybeans
@@ -147,15 +147,22 @@ nnoremap <silent> ff :FufFile<CR>
 " For NERDTree
 let NERDTreeIgnore=['\.swp$[[file]]', '\~$[[file]]']
 let NERDTreeMinimalUI=1
+" For Programming Language Checker
+let g:pymode_options_colorcolumn=0
+let g:pymode_folding=0
+let g:pymode_rope=0
+let g:go_fmt_fail_silently=1
 " Syntax Checker
-let g:go_fmt_fail_silently = 1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_jump = 0
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_balloons = 1
+let g:syntastic_shell_checkers=['sh', 'shellcheck']
+let g:syntastic_python_checkers=['python', 'pyflakes']
+let g:syntastic_go_checkers=['go', 'gofmt'] " , 'golint']
+let g:syntastic_aggregate_errors=1
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_jump=0
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_enable_balloons=1
 
 "let Tlist_GainFocus_On_ToggleOpen=1
 "let Tlist_Show_One_File=1
