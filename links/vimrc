@@ -6,6 +6,7 @@ set fileencodings=ucs-bom,utf-8,cp936
 
 set nu
 set magic
+set noimd
 set ruler
 set cindent
 set showcmd
@@ -15,12 +16,15 @@ set smartcase
 set autoindent
 set ignorecase
 set cursorline
+set nowrapscan
+set cursorcolumn
 set nocompatible
-
 set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+set signcolumn=yes
+set colorcolumn=120
 set list listchars=tab:»·,trail:·
 
 set fo=trocq
@@ -43,20 +47,18 @@ Plugin 'gmarik/Vundle.vim'
 
 " Programming Usage
 Plugin 'L9'
-Plugin 'fcitx.vim'
+"Plugin 'fcitx.vim'
 Plugin 'FuzzyFinder'
-"Plugin 'taglist.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'davidhalter/jedi-vim'
+"Plugin 'Valloric/YouCompleteMe'
 "Plugin 'klen/python-mode'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-
-" Color Usage
-Plugin 'matrix.vim--Yang'
+"Plugin 'matrix.vim--Yang'
 Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
@@ -74,10 +76,32 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" Keyboard Mapper For Window Switching
-nmap <C-j> <C-W>j<C-W>_
-nmap <C-k> <C-W>k<C-W>_
-nmap <C-l> <C-W>_
+" Colorscheme Settings
+colorscheme jelleybeans
+highlight Folded ctermbg=DarkYellow
+highlight LineNr ctermbg=NONE
+highlight NonText ctermbg=NONE
+highlight Normal ctermbg=NONE
+highlight Pmenu ctermbg=DarkYellow
+highlight SignColumn ctermbg=NONE
+highlight SpecialKey ctermbg=NONE
+highlight StatusLineNC ctermbg=DarkMagenta
+highlight SyntasticErrorSign cterm=Bold ctermfg=DarkRed ctermbg=None
+highlight SyntasticWarningSign cterm=Bold ctermfg=DarkYellow ctermbg=None
+
+au BufNewFile,BufRead *.jst,*.hbs,*.erb set filetype=html
+
+" Keyboard Mapper
+noremap  <silent> <C-y> <ESC>:w<ENTER>
+nnoremap <silent> <C-j> <C-W>j<C-W>_
+nnoremap <silent> <C-k> <C-W>k<C-W>_
+nnoremap <silent> <C-l> <C-W>_
+nnoremap <silent> cS :%s/\s\+$//g<CR>
+nnoremap <silent> cM :%s/\r$//g<CR>
+" Use ' To Comment Current Line
+autocmd filetype cpp,java,go nnoremap <silent> ' ^i//<Esc>
+autocmd filetype c nnoremap <silent> ' ^i/* <C-O>$ */<Esc>
+autocmd filetype sh,python nnoremap <silent> ' ^i#<Esc>
 
 command! -nargs=1 -bang -complete=custom,<SID>PathComplete FindInPath
       \ :find<bang> <args>
@@ -85,59 +109,16 @@ function! s:PathComplete(ArgLead, CmdLine, CursorPos)
   return UserFileComplete(a:ArgLead, a:CmdLine, a:CursorPos, 1, &path)
 endfunction
 
-" use Alt+; add comment,like emacs
-autocmd filetype cpp,java map <Esc>; $a<tab><tab>//
-autocmd filetype cpp,java imap <Esc>; <End><tab><tab>//
-autocmd filetype c map <Esc>; $a<tab><tab>/*  */<Esc>2hi
-autocmd filetype c imap <Esc>; <End><tab><tab>/*  */<Left><Left><Left>
-autocmd filetype sh map <Esc>; O#
-
-" use Alt+' comment current line
-autocmd filetype cpp,java map <Esc>' ^i//<Esc>
-autocmd filetype cpp,java imap <Esc>' <C-O>^//
-autocmd filetype c map <Esc>' ^i/* <C-O>$ */<Esc>
-autocmd filetype c imap <Esc>' <C-O>^/* <C-O>$ */
-autocmd filetype sh map <Esc>' ^i#<Esc>
-autocmd filetype sh imap <Esc>' <C-O>^#
-
-" use Ctrl+x+[l|n|p|cc] to list|next|previous|jump to count the result
-map <C-x>l <ESC>:cl<ENTER>
-map <C-x>n <ESC>:cn<ENTER>
-map <C-x>p <ESC>:cp<ENTER>
-map <C-x>c <ESC>:cc
-map <C-y> <ESC>:w<ENTER>
-inoremap <C-y> <ESC>:w<ENTER>
-nmap cS :%s/\s\+$//g<CR>:noh<CR>
-nmap cM :%s/\r$//g<CR>:noh<CR>
-
-" For Python
 " autocmd filetype python source ~/.vim/python-macros.vim
-
-" For Ruby
 " autocmd filetype ruby source ~/.vim/ruby-macros.vim
-
 " For JavaScript
 let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function;m:member'
-
-" For HTML
-au BufNewFile,BufRead *.jst,*.hbs,*.erb set filetype=html
-
-" Colorscheme Settings
-colorscheme jelleybeans
-highlight LineNr ctermbg=NONE
-highlight Normal ctermbg=NONE
-highlight NonText ctermbg=NONE
-highlight SpecialKey ctermbg=NONE
-highlight SignColumn ctermbg=NONE
-highlight Folded ctermbg=DarkYellow
-highlight Pmenu ctermbg=DarkYellow
-highlight StatusLineNC ctermbg=DarkMagenta
 
 " Plugins Mappers
 " For NERDTree
 autocmd vimenter * if !argc() | NERDTree | endif
-nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <C-n> :NERDTreeFind<CR>
+" nnoremap <C-n> :NERDTreeToggle<CR>
+" nnoremap <C-n> :NERDTreeFind<CR>
 " For FuzzyFinder
 nnoremap <silent> fb :FufBuffer<CR>
 nnoremap <silent> ff :FufFile<CR>
@@ -154,15 +135,19 @@ let g:pymode_rope=0
 let g:go_fmt_fail_silently=1
 " Syntax Checker
 let g:syntastic_shell_checkers=['sh', 'shellcheck']
-let g:syntastic_python_checkers=['python', 'pyflakes']
-let g:syntastic_go_checkers=['go', 'gofmt'] " , 'golint']
+let g:syntastic_python_checkers=['python3', 'pyflakes']
+let g:syntastic_go_checkers=['go', 'gofmt'] ", 'golint']
 let g:syntastic_aggregate_errors=1
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_jump=0
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=2
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=0
-let g:syntastic_enable_balloons=1
+let g:syntastic_enable_highlighting=1
+let g:syntastic_error_symbol = "\u2717"
+let g:syntastic_warning_symbol = "\u26A0"
+let g:syntastic_style_error_symbol = "S\u2717"
+let g:syntastic_style_warning_symbol = "S\u26A0"
 
 "let Tlist_GainFocus_On_ToggleOpen=1
 "let Tlist_Show_One_File=1

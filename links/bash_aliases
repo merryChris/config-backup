@@ -1,33 +1,9 @@
-alias update_mp3='mid3iconv -e gbk *.mp3'
-alias start_programs='~/Programs/Cmds/start_programs.sh'
-alias start_eclipse='/home/zacky/Programs/Eclipse/eclipse'
-alias upload='~/Programs/Cmds/upload.py'
-alias clip='xclip -sel clip <'
+# PROXY
+alias goproxy='export http_proxy=http://127.0.0.1:3213 https_proxy=http://127.0.0.1:3213 && echo "HTTP Proxy On"'
+alias disproxy='unset http_proxy https_proxy && echo "HTTP Proxy Off"'
 
-alias clear_tmp='rm -rf tmp/ coverage.data'
-alias compile_h1o='./script/custom/min all'
-alias compile_h2o='bundle exec rake assets:precompile RAILS_ENV=production'
-alias start_h1o='mongrel_rails start -p 1111'
-alias start_h2o='RAILS_ENV=development ASSETS_DEBUG=false ./script/rails server -p 2222'
-alias start_h2o_debug='RAILS_ENV=development ASSETS_DEBUG=true ./script/rails server -p 2222'
-alias start_h2o_prod='RAILS_ENV=production ASSETS_DEBUG=false ./script/rails server -p 2222'
-alias start_tempo='bundle exec rackup -p 3333'
+# SSH
+alias sshzz='ssh -o TCPKeepAlive=yes -o ServerAliveInterval=30 zacky@10.214.192.51'
 
-alias test_rb='RAILS_ENV=development bundle exec ./script/guard -g rspec'
-alias test_js='RAILS_ENV=development bundle exec ./script/guard -g jasmine'
-alias test_al='RAILS_ENV=development bundle exec ./script/guard'
-
-alias ssh25='ssh zacky@10.214.192.25'
-alias ssh51='ssh slave@10.214.192.51'
-alias ssh55='ssh root@10.214.192.55'
-alias ssh66='ssh zacky@10.214.192.66'
-alias sshll='ssh admin@10.214.192.41'
-alias sshgg='ssh slave@10.214.192.51'
-alias sshjj='ssh root@121.41.62.167'
-
-alias mysql200='mysql -umysqluser -pmojiti -h 10.20.0.200'
-alias mysql42='mysql -uhuro -p -h 10.16.20.42'
-alias mysql51='mysql -uroot -pyamiedie -h 10.214.192.51 -P 3306'
-alias mysql66='mysql -uroot -pzju302 -h10.214.192.66 -P 3306'
-alias mysqlll='mysql -uadmin -pkuang -h10.214.192.41 -P 3306'
-alias mysqljj='mysql -ugamedev -pzhuzhutao -h121.41.62.167 -P 3306'
+# MYSQL
+alias mysqlll='mysql -uroot -hlocalhost -P3306 -p'
