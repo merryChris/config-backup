@@ -7,6 +7,7 @@ set fileencodings=ucs-bom,utf-8,cp936
 set nu
 set magic
 set noimd
+" set paste
 set ruler
 set cindent
 set showcmd
@@ -32,49 +33,43 @@ set t_Co=256
 set mouse=v
 set laststatus=2
 set ttimeoutlen=100
+set completeopt-=preview
 set backspace=indent,eol,start
 set statusline=%<%f\ %m%r%h%w%{fugitive#statusline()}[TYPE=%Y]%=%-14.(%l,%c%V%)\ [%P]
 
 " set the runtime path to include Vundle and initialize
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.Vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" Programming Usage
 Plugin 'L9'
-"Plugin 'fcitx.vim'
-Plugin 'FuzzyFinder'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'davidhalter/jedi-vim'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'klen/python-mode'
 Plugin 'fatih/vim-go'
+Plugin 'junegunn/fzf'
+Plugin 'mileszs/ack.vim'
+Plugin 'powerline/fonts'
+Plugin 'junegunn/fzf.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'solarnz/thrift.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'tell-k/vim-autopep8'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-"Plugin 'matrix.vim--Yang'
+Plugin 'Yggdroot/indentLine'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'VundleVim/Vundle.Vim'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-airline/vim-airline-themes'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+call vundle#end()
+filetype plugin indent on
 
 " Colorscheme Settings
 colorscheme jelleybeans
@@ -92,16 +87,31 @@ highlight SyntasticWarningSign cterm=Bold ctermfg=DarkYellow ctermbg=None
 au BufNewFile,BufRead *.jst,*.hbs,*.erb set filetype=html
 
 " Keyboard Mapper
-noremap  <silent> <C-y> <ESC>:w<ENTER>
-nnoremap <silent> <C-j> <C-W>j<C-W>_
-nnoremap <silent> <C-k> <C-W>k<C-W>_
-nnoremap <silent> <C-l> <C-W>_
-nnoremap <silent> cS :%s/\s\+$//g<CR>
-nnoremap <silent> cM :%s/\r$//g<CR>
+let mapleader=","
+inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
+nnoremap <silent><C-y> <ESC>:w<CR>
+nnoremap <silent><C-h> <C-W>h
+nnoremap <silent><C-j> <C-W>j<C-W>_
+nnoremap <silent><C-k> <C-W>k<C-W>_
+nnoremap <silent><C-l> <C-W>l
+nnoremap <silent><C-m> <C-W>_
+nnoremap <silent><leader>x  <C-W>k<C-W>x<C-W>k<C-W>_
+nnoremap <silent><leader>cs :%s/\s\+$//g<CR>
+nnoremap <silent><leader>cm :%s/\r$//g<CR>
+nnoremap <silent><leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <silent><leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <silent><leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <silent><leader>sn :lnext<CR>
+nnoremap <silent><leader>sp :lprevious<CR>
+nnoremap <silent><C-n> :NERDTreeToggle<CR>
+nnoremap <leader>a :Ack!<Space>
 " Use ' To Comment Current Line
-autocmd filetype cpp,java,go nnoremap <silent> ' ^i//<Esc>
+autocmd filetype cpp,java,go,thrift nnoremap <silent> ' ^i// <Esc>
 autocmd filetype c nnoremap <silent> ' ^i/* <C-O>$ */<Esc>
-autocmd filetype sh,python nnoremap <silent> ' ^i#<Esc>
+autocmd filetype sh,python,yaml nnoremap <silent> ' ^i# <Esc>
+autocmd vimenter * if !argc() | NERDTree | endif
+" autocmd filetype python source ~/.vim/python-macros.vim
+" autocmd filetype ruby source ~/.vim/ruby-macros.vim
 
 command! -nargs=1 -bang -complete=custom,<SID>PathComplete FindInPath
       \ :find<bang> <args>
@@ -109,33 +119,45 @@ function! s:PathComplete(ArgLead, CmdLine, CursorPos)
   return UserFileComplete(a:ArgLead, a:CmdLine, a:CursorPos, 1, &path)
 endfunction
 
-" autocmd filetype python source ~/.vim/python-macros.vim
-" autocmd filetype ruby source ~/.vim/ruby-macros.vim
-" For JavaScript
-let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function;m:member'
-
-" Plugins Mappers
-" For NERDTree
-autocmd vimenter * if !argc() | NERDTree | endif
-" nnoremap <C-n> :NERDTreeToggle<CR>
-" nnoremap <C-n> :NERDTreeFind<CR>
-" For FuzzyFinder
-nnoremap <silent> fb :FufBuffer<CR>
-nnoremap <silent> ff :FufFile<CR>
-"nnoremap <C-t> :TlistToggle<CR>
-
 " Plugins Settings
-" For NERDTree
+" NERDTree
 let NERDTreeIgnore=['\.swp$[[file]]', '\~$[[file]]']
 let NERDTreeMinimalUI=1
-" For Programming Language Checker
-let g:pymode_options_colorcolumn=0
-let g:pymode_folding=0
-let g:pymode_rope=0
+" Ack.Vim
+let g:ackprg='ag --nogroup --nocolor'
+" Airline
+let g:airline_inactive_collapse=1
+let g:airline_powerline_fonts=1
+let g:airline_theme='ubaryd' " 'jellybeans'
+let g:airline#extensions#branch#format=2
+let g:airline#extensions#branch#displayed_head_limit=10
+let g:airline#extensions#branch#sha1_len=10
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#syntastic#enabled=0
+let g:airline#extensions#tabline#enabled=0
+" Vim-Go
 let g:go_fmt_fail_silently=1
+let g:go_highlight_types=1
+let g:go_highlight_functions=1
+let g:go_highlight_operators=1
+let g:go_highlight_format_string=1
+let g:go_highlight_function_calls=1
+let g:go_highlight_build_constraints=1
+let g:go_highlight_function_arguments=1
+let g:go_highlight_variable_assignments=1
+let g:go_highlight_variable_declarations=1
+" IndentLine
+let g:indentLine_char = '¦'
+let g:indentLine_fileTypeExclude = ['text', 'sh']
+" Jedi-Vim
+let g:jedi#auto_initialization=1
+let g:jedi#force_py_version=2
+let g:jedi#popup_on_dot=0
+let g:jedi#show_call_signatures=0
+let g:jedi#completions_enabled=0
 " Syntax Checker
 let g:syntastic_shell_checkers=['sh', 'shellcheck']
-let g:syntastic_python_checkers=['python3', 'pyflakes']
+let g:syntastic_python_checkers=['python', 'pylint'] ", 'pyflakes']
 let g:syntastic_go_checkers=['go', 'gofmt'] ", 'golint']
 let g:syntastic_aggregate_errors=1
 let g:syntastic_always_populate_loc_list=1
@@ -143,15 +165,39 @@ let g:syntastic_auto_jump=0
 let g:syntastic_auto_loc_list=2
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=0
+let g:syntastic_cursor_column=0
+let g:syntastic_echo_current_error=1
 let g:syntastic_enable_highlighting=1
-let g:syntastic_error_symbol = "\u2717"
-let g:syntastic_warning_symbol = "\u26A0"
-let g:syntastic_style_error_symbol = "S\u2717"
-let g:syntastic_style_warning_symbol = "S\u26A0"
+let g:syntastic_error_symbol="\u2717"
+let g:syntastic_warning_symbol="\u26A0"
+let g:syntastic_style_error_symbol="S\u2717"
+let g:syntastic_style_warning_symbol="S\u26A0"
+let g:syntastic_python_pylint_args='--disable=C0111,C0103,C0301,W0403,R0914'
+let g:syntastic_python_pylint_post_args='--msg-template="{path}:{line}:{column}:{C}: [{msg_id}-{symbol}] {msg}"'
+" let g:syntastic_python_pylint_quiet_messages = { "level" : ["warnings"] }
+" let g:syntastic_debug=1
+" YCM
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_collect_identifiers_from_comments_and_strings=0
+let g:ycm_complete_in_comments=1
+let g:ycm_complete_in_strings=1
+let g:ycm_confirm_extra_conf=0
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_server_python_interpreter='/usr/bin/python'
+" let g:ycm_log_level='debug'
 
-"let Tlist_GainFocus_On_ToggleOpen=1
-"let Tlist_Show_One_File=1
-"let Tlist_WinWidth=40
-"let Tlist_Exit_OnlyWindow=1
-"let Tlist_Use_Right_Window=1
-"let Tlist_GainFocus_On_ToggleOpen=1
+if exists('$TMUX')
+  " let &t_SI = "<Esc>[3 q"
+  " let &t_EI = "<Esc>[0 q"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  " let &t_SI = "<Esc>]50;CursorShape=1x7"
+  " let &t_EI = "<Esc>]50;CursorShape=0x7"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif

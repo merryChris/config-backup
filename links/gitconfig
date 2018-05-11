@@ -3,10 +3,11 @@
 	email = zacky.sue@gmail.com
 [core]
 	editor = vim
+	whitespace = cr-at-eol
 [alias]
 	st = status
 	br = branch
-	lg = log
+	lg = log --graph
 	co = checkout
 	ci = commit
 [color]

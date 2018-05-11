@@ -114,7 +114,8 @@ fi
 [ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 
 # Set PS1
-PS1='\[\e[0;35m\]\u@\h:\[\e[1;36m\]\w$(var=$?; __git_ps1 " \[\e[0;31m\]%s "; [ $var = 0 ] && echo -e "\[\e[1;32m\]:)" || echo -e "\[\e[1;31m\]:(")\[\e[m\]\$ '
+# PS1='\[\e[0;35m\]\u@\h:\[\e[1;36m\]\w$(var=$?; __git_ps1 " \[\e[0;31m\]%s "; [ $var = 0 ] && echo -e "\[\e[1;32m\]:)" || echo -e "\[\e[1;31m\]:(")\[\e[m\]\$ '
+PS1='\[\e[0;35m\]\u@\h:\[\e[1;36m\]$(echo "${PWD/#$HOME/\~}")$(var=$?; __git_ps1 " \[\e[0;31m\]%s "; [ $var = 0 ] && echo -e "\[\e[1;32m\]:)" || echo -e "\[\e[1;31m\]:(")\[\e[m\]\$ '
 
 export GO15VENDOREXPERIMENT=1
 export GOPATH=$HOME/Projects/Go
