@@ -59,13 +59,15 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'VundleVim/Vundle.Vim'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'python-mode/python-mode'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()
@@ -104,9 +106,12 @@ nnoremap <silent><leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <silent><leader>sn :lnext<CR>
 nnoremap <silent><leader>sp :lprevious<CR>
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
+nnoremap <leader>gn :GitGutterNextHunk<CR>
+nnoremap <leader>gp :GitGutterPrevHunk<CR>
+nnoremap <leader>s :SyntasticCheck<CR>
 nnoremap <leader>a :Ack!<Space>
 " Use ' To Comment Current Line
-autocmd filetype cpp,java,go,thrift nnoremap <silent> ' ^i// <Esc>
+autocmd filetype cpp,go,java,javascript,thrift nnoremap <silent> ' ^i// <Esc>
 autocmd filetype c nnoremap <silent> ' ^i/* <C-O>$ */<Esc>
 autocmd filetype sh,python,yaml nnoremap <silent> ' ^i# <Esc>
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -135,6 +140,11 @@ let g:airline#extensions#branch#sha1_len=10
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#syntastic#enabled=0
 let g:airline#extensions#tabline#enabled=0
+" GitGutter
+let g:gitgutter_sign_added = '∙'
+let g:gitgutter_sign_modified = '∙'
+let g:gitgutter_sign_removed = '∙'
+let g:gitgutter_sign_modified_removed = '∙'
 " Vim-Go
 let g:go_fmt_fail_silently=1
 let g:go_highlight_types=1
@@ -155,16 +165,20 @@ let g:jedi#force_py_version=2
 let g:jedi#popup_on_dot=0
 let g:jedi#show_call_signatures=0
 let g:jedi#completions_enabled=0
+" PyMode
+let g:pymode_python='python'
+let g:pymode_breakpoint=0
 " Syntax Checker
+let b:syntastic_mode='passive'
 let g:syntastic_shell_checkers=['sh', 'shellcheck']
 let g:syntastic_python_checkers=['python', 'pylint'] ", 'pyflakes']
-let g:syntastic_go_checkers=['go', 'gofmt'] ", 'golint']
+let g:syntastic_go_checkers=['go', 'gofmt'] ",'golint', 'govet', 'gometalinter']
 let g:syntastic_aggregate_errors=1
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_jump=0
 let g:syntastic_auto_loc_list=2
 let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
+let g:syntastic_check_on_wq=1
 let g:syntastic_cursor_column=0
 let g:syntastic_echo_current_error=1
 let g:syntastic_enable_highlighting=1
@@ -186,6 +200,7 @@ let g:ycm_complete_in_strings=1
 let g:ycm_confirm_extra_conf=0
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_min_num_of_chars_for_completion=2
+" let g:ycm_python_binary_path='/usr/local/bin/python3'
 let g:ycm_server_python_interpreter='/usr/bin/python'
 " let g:ycm_log_level='debug'
 
